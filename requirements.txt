@@ -9,3 +9,4 @@ matplotlib
 tqdm
 transformers
 uvicorn
+fastapi

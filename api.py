@@ -1,3 +1,4 @@
+%%writefile api.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import AutoModelForMaskedLM, AutoTokenizer
@@ -13,8 +14,9 @@ model_id = "naver/splade-cocondenser-ensembledistil"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 model_sparse = AutoModelForMaskedLM.from_pretrained(model_id)
 
-client = OpenAI(api_key="YOUR_OPENAI_API_KEY")
-pc = Pinecone(api_key="YOUR_PINECONE_API_KEY")
+client = OpenAI(api_key="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"
+)
+pc = Pinecone(api_key="pcsk_3ACEUQ_Bb4rT8NN1EAzY1zamEfBGmvZME68mEN3tEPZPNguUqcguojhucB8GZL2cPBFeLS")
 index = pc.Index("recipe-project")
 
 recipes = pd.read_pickle("recipes_with_vectors.pkl")
@@ -67,4 +69,5 @@ def get_recipe(request: QueryRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))  # Get the port from the environment
+    uvicorn.run(app, host="0.0.0.0", port=port)

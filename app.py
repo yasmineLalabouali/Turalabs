@@ -38,7 +38,7 @@ def answer_query(user_query, recipe_type):
     )
 
     pc = Pinecone(api_key="pcsk_3ACEUQ_Bb4rT8NN1EAzY1zamEfBGmvZME68mEN3tEPZPNguUqcguojhucB8GZL2cPBFeLS")
-    recipes = pd.read_pickle("/content/drive/MyDrive/Turalabs/recipes_with_vectors.pkl")
+    recipes = pd.read_pickle("recipes_with_vectors.pkl")
     index = pc.Index("recipe-project")
 
     text_dense_vector = to_dense_vector_openAI(user_query, client, model, 768)

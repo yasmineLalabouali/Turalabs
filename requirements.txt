@@ -1,8 +1,6 @@
 streamlit
 openai
 pinecone-client==3.1.0
-spacy
-torch
 pandas
 numpy
 matplotlib

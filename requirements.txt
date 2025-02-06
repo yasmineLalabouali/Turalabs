@@ -6,5 +6,4 @@ numpy
 matplotlib
 tqdm
 transformers
-uvicorn
-flask
+

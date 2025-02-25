@@ -4,6 +4,7 @@ import re
 import json
 import spacy
 import torch
+import os
 import openai
 import pandas as pd
 import numpy as np
@@ -33,8 +34,7 @@ def answer_query(user_query, recipe_type):
 
 
     client = OpenAI(
-        api_key=
-        "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"
+        api_key= os.getenv("OPENAI_API_KEY")
     )
 
     pc = Pinecone(api_key="pcsk_3ACEUQ_Bb4rT8NN1EAzY1zamEfBGmvZME68mEN3tEPZPNguUqcguojhucB8GZL2cPBFeLS")
@@ -89,6 +89,12 @@ def format_recipe_output(recipe):
 
 def main():
     st.title("🍴Recipe Recommender Chatbot")
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    if not api_key:
+        raise ValueError("API key is missing. Make sure to set OPENAI_API_KEY.")
+
+    print(f"Using API key: {api_key[:5]}... (hidden for security)")
 
     # Input field for the user query
     user_query = st.text_input("Hi, I am your recipe bot, how can I help you?","", placeholder="Eg. I want to cook an italian dish with meat")

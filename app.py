@@ -34,7 +34,7 @@ def answer_query(user_query, recipe_type):
 
 
     client = OpenAI(
-        api_key= os.getenv("OPENAI_API_KEY")
+        api_key= st.secrets["OPENAI_API_KEY"]
     )
 
     pc = Pinecone(api_key="pcsk_3ACEUQ_Bb4rT8NN1EAzY1zamEfBGmvZME68mEN3tEPZPNguUqcguojhucB8GZL2cPBFeLS")
@@ -89,7 +89,7 @@ def format_recipe_output(recipe):
 
 def main():
     st.title("🍴Recipe Recommender Chatbot")
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = st.secrets["OPENAI_API_KEY"]
 
     if not api_key:
         raise ValueError("API key is missing. Make sure to set OPENAI_API_KEY.")
